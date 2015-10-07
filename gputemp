@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+sensors | grep -A2 radeon | grep temp1 | awk '{print $2}' | sed 's/[^0-9.]//g'

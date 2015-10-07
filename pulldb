@@ -1,0 +1,2 @@
+#! /usr/bin/env sh
+adb pull /data/data/net.thetranquilpsychonaut.lawyerdiaries/app_data/ld.neodatis ~/db.neodatis

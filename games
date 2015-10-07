@@ -1,0 +1,5 @@
+#! /bin/bash
+LIST=`pacman -Qlq bsd-games | grep -E "/usr/bin/.+" | cut -d"/" -f4 | nl`
+COUNT=`echo $LIST | wc -l`
+echo $LIST
+echo $COUNT

@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+python2 /opt/client175/server.py

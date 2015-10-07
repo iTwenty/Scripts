@@ -1,0 +1,8 @@
+#! /usr/bin/env zsh
+FILE="$HOME/.gtk-bookmarks"
+LIST=`cat $FILE` 
+CHOICE=`echo $LIST | cut -d" " -f2- | dmenu -b -i -fn '-*-terminus-medium-*-*-*-17-*-*-*-*-*-iso8859-1' -nb "#000000" -nf "#218eb1" -sb "#218eb1" -sf "#000000"`
+if [ "x$CHOICE" != "x" ]; then
+    URI=`echo $LIST | grep $CHOICE | cut -d" " -f1`
+    exec Thunar $URI & disown
+fi

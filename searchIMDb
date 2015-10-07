@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+usage()
+{
+    echo -e "$0 <movie name>"
+}
+if [[ $# != 1 ]]; then
+    usage
+    exit 1
+fi
+query=`echo $1|sed "s/\.[^\.]*$//g"`
+opera "http://www.imdb.com/find?s=all&q=$query"
+

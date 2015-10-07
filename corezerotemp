@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+sensors | grep "Core 0" | awk '{print $3}' | cut -d"+" -f2- 

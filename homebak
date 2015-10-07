@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+echo -e "Backup in progress\nUse tail on ~/.logs/rsync.log to monitor progress" | xargs -0 notify-send -i gtk-harddisk
+rsync -auP /home/itwenty/* --exclude-from "/home/itwenty/.logs/rsync_exclude" /run/media/itwenty/data
+if [ $? -ne 0 ]; then
+    echo -e "Backup failed!" | xargs -0 notify-send -i important
+else
+    echo -e "Backup successful" | xargs -0 notify-send -i download
+fi

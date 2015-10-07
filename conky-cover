@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+MUSIC_DIR="$HOME/Music"
+COVER_NAME="Cover.jpg"
+NO_COVER="$MUSIC_DIR/Cover.jpg"
+while true; do
+    mpc idle player > /dev/null
+    PATH_TO_COVER="`mpc --format %file% | head -1 | xargs -0 dirname`"
+    COVER_ART="$MUSIC_DIR/$PATH_TO_COVER/$COVER_NAME"
+    if [[ ! -f $COVER_ART ]]; then
+        COVER_ART="$NO_COVER"
+    fi
+    convert -resize 300x300 "$COVER_ART" "/tmp/$COVER_NAME"
+done;

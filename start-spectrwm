@@ -1,0 +1,4 @@
+#!/bin/bash
+# this file is called by .xinitrc to start some nice apps for spectrwm
+exec spectrwm
+

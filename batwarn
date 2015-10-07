@@ -1,0 +1,18 @@
+#! /usr/bin/env python
+import subprocess
+BATPATH = "/sys/class/power_supply/BAT0/"
+BATFULL = int(subprocess.getoutput("cat "+BATPATH+"energy_full"))
+BATCURR = int(subprocess.getoutput("cat "+BATPATH+"energy_now"))
+BATSTATUS = subprocess.getoutput("cat "+BATPATH+"status")
+BATCHARGE = int((BATCURR / BATFULL) * 100)
+BATLOW = 15
+BATCRITICAL = 10
+if BATSTATUS == "Discharging":
+    if BATCHARGE <= BATLOW and BATCHARGE > BATCRITICAL:
+        subprocess.call(["notify-send","Battery level is "+str(BATCHARGE)+"%. I will suspend automatically at 5%"])
+    elif BATCHARGE <= BATCRITICAL:
+        subprocess.call(["/home/itwenty/bin/spnd & disown"], shell=True)
+    else:
+        pass
+else:
+    pass

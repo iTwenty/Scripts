@@ -1,0 +1,56 @@
+#! /usr/bin/env python2
+
+import simplejson as json
+import urllib
+import sys
+import os
+import string
+from mutagen.easyid3 import EasyID3
+
+def fetchCoverArt( artist, album ):
+    apiKey  = "e721a748b4d770c4496885819b715faa"
+    method  = "album.getinfo"
+    artist  = urllib.quote( artist.lower().encode("utf-8") )
+    album   = urllib.quote( album.lower().encode("utf-8") )
+    url     = "http://ws.audioscrobbler.com/2.0/?method=%s&api_key=%s&artist=%s&album=%s&format=json" % (method, apiKey, artist, album)
+    
+    try:
+        reply = urllib.urlopen( url )
+    except:
+        print "Error connecting to last.fm"
+        exit( 4 )
+
+    albumInfo = json.load( reply )
+    coverUrl = albumInfo["album"]["image"][-1]["#text"]
+
+    try:
+        coverReply = urllib.urlopen( coverUrl )
+    except:
+        
+        print "Error fetching cover from: \n" + coverUrl
+        exit( 5 )
+
+    coverArt = coverReply.read()
+    coverName = "Cover" + coverUrl[-4:]
+    fout = open( coverName, "wb" )
+    fout.write( coverArt )
+    fout.close();
+    
+def main():
+    if len( sys.argv ) != 2:
+        print "Invalid arguments"
+        exit( 1 )
+    filePath = sys.argv[1]
+    
+    # Check if the file path is valid and existing
+    try:
+        os.stat( filePath )
+    except OSError:
+        print "Not a valid path"
+        exit( 2 )
+
+    # Check if file is valid mp3
+
+
+if __name__ == "__main__":
+    main()

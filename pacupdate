@@ -1,0 +1,4 @@
+#! /bin/zsh
+if [[ `cat /sys/class/net/wlan0/operstate` == "up" && ! -f /tmp/localsync/pacman/db.lck ]]; then
+    fakeroot pacman -Syy -b /tmp/localsync/pacman || rm /tmp/localsync/pacman/db.lck
+fi

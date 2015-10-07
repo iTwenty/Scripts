@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+cowsay -f $(ls /usr/share/cows/|sort -R|head -1) $(fortune -a)

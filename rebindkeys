@@ -1,0 +1,4 @@
+#! /bin/sh
+xmodmap -e "clear Lock"
+xmodmap -e "keycode 66=XF86AudioPlay"
+xmodmap -e "keycode 135=Super_L"

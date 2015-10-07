@@ -1,0 +1,32 @@
+#! /usr/bin/env bash
+if [[ ! -d $1 ]]; then
+    echo -e "Invalid Directory"
+    exit 1
+fi
+DIRNAME="$1"
+
+echo $DIRNAME | grep -E '^[1-9][0-9][0-9][0-9] .*' > /dev/null
+
+if [[ $? == 0 ]]; then
+    echo -e  "'$DIRNAME' has a year"
+    exit 0
+fi
+
+FILENAME="`ls \"$DIRNAME\" | head -1`"
+FILEPATH="$DIRNAME/$FILENAME"
+
+YEAR=`mid3v2 "$FILEPATH" | grep -a TDRC | cut -d"=" -f2-`
+
+if [[ "$YEAR" == "" ]]; then
+    echo -e "No year found in album '$DIRNAME'"
+    exit 0
+fi
+
+CHOICE="y"
+
+echo -e "Rename '$DIRNAME' to '$YEAR $DIRNAME'?"
+read CHOICE
+if [[ $CHOICE = [nN] ]]; then
+    exit 0
+fi
+mv "$DIRNAME" "$YEAR $DIRNAME"

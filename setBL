@@ -1,0 +1,27 @@
+#! /bin/bash
+MINVAL=0
+MAXVAL=`cat /sys/class/backlight/acpi_video0/max_brightness`
+FILE="/sys/class/backlight/acpi_video0/brightness"
+
+function usage()
+{
+  echo -e "Usage : $0 <value>\n"
+  echo -e "<value> is an integer between $MINVAL and $MAXVAL\n"
+  echo -e "Current brightness value: `cat $FILE`" 
+}
+
+if [ $UID -ne 0 ]; then
+  echo -e "You must be root to run this script\n"
+  usage
+  exit 0
+fi
+
+if [ $# -eq 1 ]; then
+  if [ $1 -ge $MINVAL -a $1 -le $MAXVAL ]; then
+    echo $1 > $FILE
+  else
+    usage
+  fi
+else
+  usage
+fi

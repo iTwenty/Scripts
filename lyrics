@@ -1,0 +1,5 @@
+while true; do
+    /usr/bin/mpc idle > /dev/null
+    echo -e "\n<<< `/usr/bin/mpc current` >>>\n" > /home/itwenty/bin/lyrics.txt
+    /home/itwenty/bin/lyrics.py > /home/itwenty/bin/lyrics.txt
+done

@@ -1,0 +1,6 @@
+#! /usr/bin/env zsh
+FILE="/usr/share/dict/words"
+WORD=`cat $FILE | dmenu -b -i -fn '-*-tamsyn-medium-*-*-*-17-*-*-*-*-*-iso8859-1' -nb "#000000" -nf "#c9c9c9" -sb "#000000" -sf "#218eb1"`
+if [ "x$WORD" != "x" ]; then
+    exec xfce4-dict $WORD & disown
+fi

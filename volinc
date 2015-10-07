@@ -1,0 +1,2 @@
+#! /bin/bash
+amixer -q set Master playback 5%+ unmute

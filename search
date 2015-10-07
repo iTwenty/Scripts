@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+echo -e "==============PACMAN============"
+echo -e "`pacman -Ss $1`"
+echo -e "==============AUR==============="
+echo -e "`cower -s $1`"

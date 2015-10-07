@@ -1,0 +1,14 @@
+#! /bin/sh
+LOCALMOVIEPATH="/home/itwenty/Music"
+DISKMOVIEPATH="/run/media/itwenty/data/Videos/Music"
+if [ -d $DISKMOVIEPATH ]; then
+    MOVIEPATH=$DISKMOVIEPATH
+else
+    MOVIEPATH=$LOCALMOVIEPATH
+fi
+MOVIELIST=`ls -1 "$MOVIEPATH"`
+MOVIECHOICE=`echo -e "$MOVIELIST" | dmenu -l 10 -i -fn '-*-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-1' -nb "#191c1e" -nf "#bebebe" -sb "#000000" -sf "#ffffff"`
+if [ "x$MOVIECHOICE" != "x" ]; then
+    exec thunar "$MOVIEPATH/$MOVIECHOICE" & disown
+fi
+
