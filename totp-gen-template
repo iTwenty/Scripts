@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+OPTIONS="google microsoft dropbox facebook quit"
+select opt in $OPTIONS; do
+if [ "$opt" = "google" ]; then
+  oathtool --base32 --totp "YOUR SECRET KEY" -d 6
+elif [ "$opt" = "microsoft" ]; then
+  oathtool --base32 --totp "YOUR SECRET KEY" -d 6
+elif [ "$opt" = "dropbox" ]; then
+  oathtool --base32 --totp "YOUR SECRET KEY" -d 6
+elif [ "$opt" = "facebook" ]; then
+  oathtool --base32 --totp "YOUR SECRET KEY" -d 6
+elif [ "$opt" = "quit" ]; then
+  exit
+else
+  clear
+  echo "Choose an available option."
+fi
+done
